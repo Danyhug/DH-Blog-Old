@@ -11,7 +11,7 @@ Vue.use(VueRouter)
 
 const routes = [
   { path: '/', component: HomeView },
-  { path: '/article', component: ArticleView },
+  { path: '/article/:id', component: ArticleView },
   {
     path: '/admin', component: AdminView, children: [
       {

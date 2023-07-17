@@ -2,7 +2,7 @@
     <div id="app">
         <Header></Header>
         <Banner>
-            <h3>安卓大作业——飞鸽传书（高仿微信）</h3>
+            <h3>{{ title }}</h3>
             <div class="top">
                 <span class="date">发表于 2023-07-11</span>
                 <span class="num-word">本文字数 6.5k 字</span>
@@ -10,7 +10,7 @@
             </div>
         </Banner>
         <Main>
-            <ArticleChild></ArticleChild>
+            <ArticleChild :content="content"></ArticleChild>
         </Main>
         <Footer></Footer>
     </div>
@@ -25,6 +25,29 @@ import Footer from '@/components/Footer/Footer'
 
 export default {
     name: 'HomeView',
+    data() {
+        return {
+            // 文章信息
+            id: 1,
+            title: '',
+            content: ''
+        }
+    },
+    props: {
+    },
+    methods: {
+        // 获取文章内容
+        async getArticle() {
+            this.id = this.$route.params.id
+            let res = await this.$http.get('article/' + this.id)
+            let data = res.data;
+            ({ Title: this.title, Content: this.content } = data.data)
+
+        }
+    },
+    mounted() {
+        this.getArticle()
+    },
     components: {
         Header,
         Banner,
@@ -37,6 +60,7 @@ export default {
 <style lang="less" scoped>
 .top {
     margin-top: 1.125rem;
+
     span {
         margin-right: 1.25rem;
     }

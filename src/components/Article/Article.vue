@@ -1,40 +1,59 @@
 <template>
   <article class="type-img-left">
-    <div class="left">
-      <img src="https://shilight.cn/images/background/8.jpg" alt="">
-    </div>
-    <div class="right">
-      <div class="top">
-        <span class="date">2023-07-11</span>
-        <span class="num-word">6.5k 字</span>
-        <span class="time-consum">2023-07-11</span>
+    <router-link :to="'article/' + id">
+
+      <div class="cover">
+        <div class="left">
+          <img src="https://shilight.cn/images/background/8.jpg" alt="">
+        </div>
+        <div class="right">
+          <div class="top">
+            <span class="date">2023-07-11</span>
+            <span class="num-word">6.5k 字</span>
+            <span class="time-consum">2023-07-11</span>
+          </div>
+          <p class="title">
+            <a href="">{{ title }}</a>
+          </p>
+          <p class="text">{{ content }}</p>
+          <div class="bottom">
+            <span>
+              <a href="">安卓开发</a>
+            </span>
+            <a href="" class="more">more...</a>
+          </div>
+        </div>
       </div>
-      <p class="title">
-        <a href="">安卓大作业——飞鸽传书（高仿微信）</a>
-      </p>
-      <p class="text"># 产品介绍 # 项目背景 随着网络的出现，即时通讯软件便出现在了人们的生活中，即时通讯app可以帮助人们实现快速沟通，节省时间，提高效率。例如，团队成员可以在办公室或出差途中随</p>
-      <div class="bottom">
-        <span>
-          <a href="">安卓开发</a>
-        </span>
-        <a href="" class="more">more...</a>
-      </div>
-    </div>
+    </router-link>
   </article>
 </template>
 
 <script>
 export default {
-  name: 'Article'
+  name: 'Article',
+  props: {
+    id: {
+      type: Number,
+      require: true
+    },
+    title: {
+      type: String,
+      require: true
+    },
+    content: {
+      type: String,
+      require: true
+    }
+  }
 }
 </script>
 
 <style lang="less" scoped>
-article {
+.cover {
   display: flex;
   width: 100%;
-  height: 260px;
-  border-radius: 16px;
+  height: 16.25rem;
+  border-radius: 1rem;
   background: var(--grey-0);
   overflow: hidden;
 
@@ -57,7 +76,7 @@ article {
 
   .right {
     position: relative;
-    padding: 20px;
+    padding: 1rem;
 
     div {
       width: 100%;
@@ -66,52 +85,58 @@ article {
     .top {
       display: flex;
       justify-content: flex-end;
-      font-size: 14px;
+      font-size: .875rem;
 
       span {
-        margin-left: 10px;
+        margin-left: .625rem;
       }
     }
 
     .title {
-      margin: 15px 0;
+      margin: .9375rem 0;
       // text-align: center;
       font-weight: 700;
 
       a {
-        font-size: 20px;
+        font-size: 1.25rem;
         color: rgb(233, 84, 107);
       }
     }
 
     // 正文描述
     .text {
-      font-size: 14px;
+      font-size: .875rem;
       line-height: 2;
+      max-height: 128px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     .bottom {
-      padding-left: 20px;
+      padding-left: 1.25rem;
       position: absolute;
       left: 0;
       bottom: 0;
       display: flex;
-      line-height: 42px;
+      line-height: 2.625rem;
       justify-content: space-between;
 
       span {
         a {
-          font-size: 14px;
+          font-size: .875rem;
           color: var(--grey-5);
         }
       }
 
       .more {
-        width: 72px;
-        height: 42px;
+        width: 4.5rem;
+        height: 2.625rem;
         text-align: center;
         color: rgba(255, 255, 255, .6);
-        border-radius: 16px 0;
+        border-radius: 1rem 0;
         background-image: linear-gradient(to right, var(--color-pink) 0, var(--color-orange) 100%);
       }
     }

@@ -2,7 +2,7 @@
     <div>
         {{ content }}
         <Editor ref="myEditor" :options="editorOptions" height="500px" initialEditType="markdown" previewStyle="vertical" />
-        <Viewer ref="myViewer" :initialValue="viewerText" />
+        <Viewer ref="myViewer" :options="viewerOptions" :initialValue="viewerText" />
         <el-button type="primary" @click="postArticle">确定</el-button>
     </div>
 </template>
@@ -26,7 +26,10 @@ export default {
                 language: 'zh-CN',
                 plugins: [codeSyntaxHighlight]
             },
-            viewerText: '# This is Viewer.\n Hello World.'
+            viewerOptions: {
+                plugins: [codeSyntaxHighlight]
+            },
+            viewerText: '# 我是一个测试文本\n## 是的\n```javascript\nlet n = Number;\n```'
         }
     },
     components: {
@@ -34,10 +37,24 @@ export default {
         Viewer
     },
     methods: {
-        postArticle() {
+        async postArticle() {
             // 获取输入的内容
             let markdown = this.$refs.myEditor.invoke('getMarkdown')
             this.$refs.myViewer.invoke('setMarkdown', markdown)
+            // 将内容发送到数据库
+            const data = {
+                title: '测试内容',
+                content: markdown
+            }
+            let res = await this.$http.post('article/add', data)
+            console.log(res.data)
+            // const data = {
+            //     start: 0,
+            //     limit: 10
+            // }
+            // this.$http.post('article/query', data).then(res => {
+            //     console.log(res)
+            // })
         }
     }
 }

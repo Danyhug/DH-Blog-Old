@@ -5,12 +5,7 @@
             <p>文章列表</p>
         </div>
         <div class="posts">
-            <Article></Article>
-            <Article></Article>
-            <Article></Article>
-            <Article></Article>
-            <Article></Article>
-            <Article></Article>
+            <Article v-for="item in articleList" :id="item.ID" :title="item.Title" :content="item.Content"></Article>
         </div>
     </div>
 </template>
@@ -20,6 +15,26 @@ export default {
     name: 'HomeChild',
     components: {
         Article
+    },
+    data() {
+        return {
+            // 文章列表
+            articleList: []
+        }
+    },
+    methods: {
+        async getArticleList() {
+            let data = {
+                start: 0,
+                limit: 10
+            }
+            let res = await this.$http.post('article/query', data)
+            this.articleList = res.data.data
+            console.log(this.articleList)
+        }
+    },
+    mounted() {
+        this.getArticleList()
     }
 }
 </script>
