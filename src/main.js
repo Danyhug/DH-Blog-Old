@@ -3,6 +3,10 @@ import App from './App.vue'
 import router from './router'
 import Axios from 'axios'
 
+import { getDate, getWordCount } from '@/assets/js/utils'
+Vue.prototype.$getDate = getDate
+Vue.prototype.$getWordCount = getWordCount
+
 Vue.config.productionTip = false
 
 Vue.prototype.$http = Axios.create({

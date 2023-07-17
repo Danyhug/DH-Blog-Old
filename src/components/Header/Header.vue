@@ -4,21 +4,21 @@
             <div class="inner">
                 <ul class="menu">
                     <li class="item">
-                        <a href="">
+                        <a href="/">
                             <Icon iconName="icon-chengbao"></Icon>
                             首页
                         </a>
                     </li>
                     <li class="item">
-                        <a href="">
+                        <a href="about">
                             <Icon iconName="icon-chaoren"></Icon>
                             关于
                         </a>
                     </li>
                     <li class="item">
-                        <a href="">
+                        <a href="tags">
                             <Icon iconName="icon-shejiwenzhang"></Icon>
-                            文章
+                            分类
                         </a>
                     </li>
                 </ul>

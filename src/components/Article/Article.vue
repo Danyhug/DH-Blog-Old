@@ -8,9 +8,9 @@
         </div>
         <div class="right">
           <div class="top">
-            <span class="date">2023-07-11</span>
-            <span class="num-word">6.5k 字</span>
-            <span class="time-consum">2023-07-11</span>
+            <span class="date">{{ $getDate(created) }}</span>
+            <span class="num-word">{{ $getWordCount(content) }} 字</span>
+            <span class="time-consum">{{ ($getWordCount(content) / 200 + 0.5).toFixed(0) }} 分钟</span>
           </div>
           <p class="title">
             <a href="">{{ title }}</a>
@@ -43,8 +43,13 @@ export default {
     content: {
       type: String,
       require: true
+    },
+    created: {
+      type: Number
     }
-  }
+  },
+  methods: {
+  },
 }
 </script>
 

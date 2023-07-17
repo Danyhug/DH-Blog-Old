@@ -31,10 +31,14 @@
 
           <ul class="external-links">
             <li>
-              <Icon iconName="icon-github" iconSize="1.5"></Icon>
+              <a href="https://github.com/Danyhug" target="_blank">
+                <Icon iconName="icon-github" iconSize="1.5"></Icon>
+              </a>
             </li>
             <li>
-              <Icon iconName="icon-bilibili" iconSize="1.5" style="fill: rgb(250,116,153)"></Icon>
+              <a href="https://space.bilibili.com/38630127" target="_blank">
+                <Icon iconName="icon-bilibili" iconSize="1.5" style="fill: rgb(250,116,153)"></Icon>
+              </a>
             </li>
           </ul>
         </div>
@@ -61,7 +65,7 @@ export default {
 
 .left,
 .right {
-  padding: 40px 25px;
+  padding: 2.5rem 1.5625rem;
 }
 
 .left {
@@ -77,19 +81,19 @@ export default {
 
       .num {
         font-weight: bold;
-        font-size: 1.375rem;
+        font-size: 22px;
       }
     }
 
     span {
       display: block;
-      border-left: .0625rem solid var(--grey-4);
+      border-left: 1px solid var(--grey-4);
     }
   }
 
   img {
-    width: 150px;
-    height: 150px;
+    width: 9.375rem;
+    height: 9.375rem;
     border-radius: 50%;
   }
 
@@ -98,7 +102,7 @@ export default {
   }
 
   .links {
-    margin: 20px 0;
+    margin: 1.25rem 0;
     display: flex;
     justify-content: space-between;
   }
@@ -108,7 +112,7 @@ export default {
 
     li {
       display: inline-block;
-      padding: 0 15px;
+      padding: 0 .9375rem;
 
     }
   }
@@ -117,6 +121,6 @@ export default {
 // 右侧部分
 .right {
   width: 70%;
-  box-shadow: 0 0 10px 2px var(--grey-2);
+  box-shadow: 0 0 .625rem .125rem var(--grey-2);
 }
 </style>

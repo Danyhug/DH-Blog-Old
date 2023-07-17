@@ -4,9 +4,9 @@
         <Banner>
             <h3>{{ title }}</h3>
             <div class="top">
-                <span class="date">发表于 2023-07-11</span>
-                <span class="num-word">本文字数 6.5k 字</span>
-                <span class="time-consum">阅读时长 6 分钟</span>
+                <span class="date">发表于 {{ $getDate(created, true) }}</span>
+                <span class="num-word">本文字数 {{ $getWordCount(content) }} 字</span>
+                <span class="time-consum">阅读时长 {{ ($getWordCount(content) / 200 + 0.5).toFixed(0) }} 分钟</span>
             </div>
         </Banner>
         <Main>
@@ -30,7 +30,8 @@ export default {
             // 文章信息
             id: 1,
             title: '',
-            content: ''
+            content: '',
+            created: 0
         }
     },
     props: {
@@ -41,7 +42,7 @@ export default {
             this.id = this.$route.params.id
             let res = await this.$http.get('article/' + this.id)
             let data = res.data;
-            ({ Title: this.title, Content: this.content } = data.data)
+            ({ Title: this.title, Content: this.content, Created: this.created } = data.data)
 
         }
     },

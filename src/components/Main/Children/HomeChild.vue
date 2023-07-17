@@ -5,7 +5,7 @@
             <p>文章列表</p>
         </div>
         <div class="posts">
-            <Article v-for="item in articleList" :id="item.ID" :title="item.Title" :content="item.Content"></Article>
+            <Article v-for="item in articleList" :id="item.ID" :title="item.Title" :content="item.Content" :created="item.Created"></Article>
         </div>
     </div>
 </template>
