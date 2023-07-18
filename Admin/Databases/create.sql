@@ -3,7 +3,8 @@ CREATE TABLE IF NOT EXISTS articles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title VARCHAR(30) NOT NULL,
     content TEXT NOT NULL,
-    created INTEGER -- 发布时间
+    created INTEGER, -- 发布时间
+    updated INTEGER -- 更改时间
 );
 
 -- 创建标签-文章关联表

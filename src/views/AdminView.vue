@@ -33,7 +33,7 @@ export default {
 
 <style lang="less" scoped>
 .main-container {
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .el-header,
@@ -69,9 +69,7 @@ export default {
     color: #333;
 }
 
-body>.el-container {
-    margin-bottom: 2.5rem;
-}
+
 
 .el-container:nth-child(5) .el-aside,
 .el-container:nth-child(6) .el-aside {
