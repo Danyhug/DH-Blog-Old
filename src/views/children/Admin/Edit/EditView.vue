@@ -55,7 +55,6 @@ export default {
         async postArticle() {
             // 获取输入的内容
             let markdown = this.$refs.myEditor.invoke('getMarkdown')
-            this.$refs.myViewer.invoke('setMarkdown', markdown)
             // 将内容发送到数据库
             const data = {
                 title: this.title,
@@ -78,7 +77,7 @@ export default {
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                this.$refs.myViewer.invoke('setMarkdown', '')
+                this.$refs.myEditor.invoke('setMarkdown', '')
                 this.$message({
                     type: 'success',
                     message: '已清空'

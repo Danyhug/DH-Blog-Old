@@ -6,7 +6,7 @@
             <div class="top">
                 <span class="date">发表于 {{ $getDate(created, true) }}</span>
                 <span class="num-word">本文字数 {{ $getWordCount(content) }} 字</span>
-                <span class="time-consum">阅读时长 {{ ($getWordCount(content) / 200 + 0.5).toFixed(0) }} 分钟</span>
+                <span class="time-consum">阅读时长 {{ (content.length / 300 + 0.5).toFixed(0) }} 分钟</span>
             </div>
         </Banner>
         <Main>

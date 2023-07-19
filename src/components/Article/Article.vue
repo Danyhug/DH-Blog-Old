@@ -8,9 +8,18 @@
         </div>
         <div class="right">
           <div class="top">
-            <span class="date">{{ $getDate(created) }}</span>
-            <span class="num-word">{{ $getWordCount(content) }} 字</span>
-            <span class="time-consum">{{ ($getWordCount(content) / 200 + 0.5).toFixed(0) }} 分钟</span>
+            <span class="date">
+              <Icon iconName="icon-xuanzeshijian" iconSize="1.5"></Icon>
+              {{ $getDate(created) }}
+            </span>
+            <span class="num-word">
+              <Icon iconName="icon-xuanzeshijian" iconSize="1.5"></Icon>
+              {{ $getWordCount(content) }} 字
+            </span>
+            <span class="time-consum">
+              <Icon iconName="icon-yanjingliulankeshi" iconSize="1.3"></Icon>
+              {{ (content.length / 200 + 0.5).toFixed(0) }} 分钟
+            </span>
           </div>
           <p class="title">
             <a href="">{{ title }}</a>
