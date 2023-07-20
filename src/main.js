@@ -10,7 +10,8 @@ Vue.prototype.$getWordCount = getWordCount
 Vue.config.productionTip = false
 
 Vue.prototype.$http = Axios.create({
-  baseURL: 'http://localhost:2233/',
+  // baseURL: 'http://localhost:2233/',
+  baseURL: 'http://mooc.zzf4.top:2233/',
   headers: {
     'Content-Type': 'application/json'
   }

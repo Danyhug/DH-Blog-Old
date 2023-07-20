@@ -5,33 +5,58 @@
             <p>文章列表</p>
         </div>
         <div class="posts">
-            <Article v-for="item in articleList" :id="item.ID" :title="item.Title" :content="item.Content" :created="item.Created"></Article>
+            <Article v-for="item in articleList" :id="item.ID" :title="item.Title" :content="item.Content"
+                :created="item.Created"></Article>
         </div>
+        <Pagination :total="Math.ceil(this.pageSize / this.limit)" :nowPage="this.$route.params.id"></Pagination>
     </div>
 </template>
 <script>
 import Article from '@/components/Article/Article.vue'
+import Pagination from '@/components/Pagination/Pagination.vue'
 export default {
     name: 'HomeChild',
     components: {
-        Article
+        Article,
+        Pagination
+    },
+
+    watch: {
+        $route(to, from) {
+            console.log('路由变化了')
+            this.getArticleList()
+        }
     },
     data() {
         return {
             // 文章列表
-            articleList: []
+            articleList: [],
+            pageSize: 0,
+            start: 0,
+            limit: 6
         }
     },
     methods: {
         async getArticleList() {
+            let page_id = this.$route.params.id
+            // 获取起始页
+            this.start = page_id * this.limit - this.limit
+
             let data = {
-                start: 0,
-                limit: 10
+                start: this.start,
+                limit: this.limit
             }
             let res = await this.$http.post('article/query', data)
             this.articleList = res.data.data
             console.log(this.articleList)
+        },
+        async getPageSize() {
+            let res = await this.$http.post('article/pageSize')
+            this.pageSize = res.data.size
         }
+    },
+    created() {
+        this.getPageSize()
     },
     mounted() {
         this.getArticleList()

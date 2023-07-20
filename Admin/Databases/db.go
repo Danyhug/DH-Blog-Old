@@ -10,10 +10,11 @@ import (
 // DB 数据库对象
 var DB *gorm.DB
 
-//var path, _ = os.Getwd()
-
 func InitDB() {
 	fullPath := filepath.Join("P:\\Code\\Vue\\dh-blog\\Admin", "db.sqlite")
+
+	//var path, _ = os.Getwd()
+	//fullPath := filepath.Join(path, "db.sqlite")
 
 	fmt.Println("数据库目录", fullPath)
 	db, err := gorm.Open(sqlite.Open(fullPath), &gorm.Config{})

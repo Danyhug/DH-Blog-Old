@@ -49,3 +49,11 @@ func FindArticle(id int) (Article, bool) {
 	fmt.Println("查询指定文章出错", result.Error)
 	return article, false
 }
+
+// SelectArticleSize 查询总页数
+func SelectArticleSize() int64 {
+	var article Article
+	var count int64
+	Databases.DB.Model(&article).Count(&count)
+	return count
+}

@@ -10,7 +10,8 @@ import EditView from '@/views/children/Admin/Edit/EditView.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: HomeView },
+  { path: '/', redirect: '/page/1' },
+  { path: '/page/:id', component: HomeView },
   { path: '/article/:id', component: ArticleView },
   {
     path: '/admin', component: AdminView, children: [

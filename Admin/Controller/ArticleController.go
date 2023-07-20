@@ -4,6 +4,7 @@ import (
 	"dhblog-admin/Models"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strconv"
 )
 
@@ -63,7 +64,7 @@ func QueryArticle(c *gin.Context) {
 	})
 }
 
-// 查询指定文章
+// QuerySingleArticle 查询指定文章
 func QuerySingleArticle(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	data, status := Models.FindArticle(id)
@@ -79,5 +80,26 @@ func QuerySingleArticle(c *gin.Context) {
 		"code": -1,
 		"msg":  "该文章获取失败",
 		"data": "",
+	})
+}
+
+// UploadImg 上传图片
+func UploadImg(c *gin.Context) {
+	// 单文件
+	file, _ := c.FormFile("file")
+
+	dst := "./img/" + file.Filename
+	// 上传文件至指定的完整文件路径
+	c.SaveUploadedFile(file, dst)
+
+	c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
+}
+
+// QueryPageSize 查询页数
+func QueryPageSize(c *gin.Context) {
+	data := Models.SelectArticleSize()
+	c.JSON(200, gin.H{
+		"code": 1,
+		"size": data,
 	})
 }

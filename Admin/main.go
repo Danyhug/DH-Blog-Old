@@ -15,7 +15,7 @@ func main() {
 	router := gin.Default()
 	// 配置跨域处理
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:8080"},                   // 允许的源
+		AllowOrigins:     []string{"*"},                                       // 允许的源
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},            // 允许的 HTTP 方法
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"}, // 允许的请求头
 		AllowCredentials: true,                                                // 允许携带身份验证凭证（如 Cookie）
@@ -29,8 +29,14 @@ func main() {
 	// 文章相关接口
 	article := router.Group("/article")
 	{
+		// 查询页数
+		article.POST("pageSize", Controller.QueryPageSize)
+
 		// 新增
 		article.POST("add", Controller.CreateArticle)
+		// 上传图片
+		article.POST("uploadImg", Controller.UploadImg)
+
 		// 查询
 		article.POST("query", Controller.QueryArticle)
 		// 查询单用户

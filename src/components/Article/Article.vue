@@ -1,7 +1,6 @@
 <template>
   <article class="type-img-left">
-    <router-link :to="'article/' + id">
-
+    <router-link :to="'/article/' + id">
       <div class="cover">
         <div class="left">
           <img src="https://shilight.cn/images/background/8.jpg" alt="">
@@ -66,7 +65,7 @@ export default {
 .cover {
   display: flex;
   width: 100%;
-  height: 16.25rem;
+  height: 224px;
   border-radius: 1rem;
   background: var(--grey-0);
   overflow: hidden;
@@ -107,7 +106,7 @@ export default {
     }
 
     .title {
-      margin: .9375rem 0;
+      margin: 12px 0;
       // text-align: center;
       font-weight: 700;
 
@@ -124,7 +123,7 @@ export default {
       max-height: 128px;
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 3;
       text-overflow: ellipsis;
       overflow: hidden;
     }
