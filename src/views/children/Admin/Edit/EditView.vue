@@ -12,8 +12,9 @@
             <el-divider content-position="center">
                 <p class="tip">文章内容</p>
             </el-divider>
-            <Editor ref="myEditor" :options="editorOptions" height="500px" initialEditType="markdown"
-                previewStyle="vertical" />
+            <div ref="myEditor"></div>
+            <!-- <Editor ref="myEditor" :options="editorOptions" height="500px" initialEditType="markdown"
+                previewStyle="vertical" /> -->
         </div>
         <div class="func-btn">
             <el-button type="primary" @click="postArticle">发布</el-button>
@@ -25,7 +26,7 @@
 <script>
 import '@toast-ui/editor/dist/toastui-editor.css';
 import '@toast-ui/editor/dist/i18n/zh-cn';
-import { Editor } from '@toast-ui/vue-editor';
+import Editor from '@toast-ui/editor';
 
 import 'prismjs/themes/prism.css';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
@@ -40,8 +41,12 @@ export default {
             editorOptions: {
                 minHeight: '200px',
                 language: 'zh-CN',
+                height: '500px',
+                initialEditType: 'markdown',
+                previewStyle: 'vertical',
                 plugins: [codeSyntaxHighlight]
             },
+            editor: {},
             viewerOptions: {
                 plugins: [codeSyntaxHighlight]
             },
@@ -49,12 +54,40 @@ export default {
         }
     },
     components: {
-        Editor
     },
     methods: {
+        InitEditer() {
+            this.editor = new Editor({
+                el: this.$refs.myEditor,
+                ...this.editorOptions
+            })
+            // 移除默认事件
+            this.editor.removeHook('addImageBlobHook')
+            this.editor.addHook('addImageBlobHook', (blob, callback) => {
+                const formData = new FormData()
+                formData.append('file', blob)
+
+                this.$http.post('article/uploadImg', formData, {
+                    headers: {
+                        //文件上传的类型
+                        'Content-Type': 'multipart/form-data',
+                    }
+                }).then(res => {
+                    let path = res.data
+                    path = path.replace('.', this.$serveUrl + '/article')
+                    // 获取内容
+                    let markdown = this.editor.getMarkdown()
+                    // 将图片添加
+                    markdown += `![image](${path})`
+                    this.editor.setMarkdown(markdown)
+                    console.log(path)
+                })
+            })
+            console.log(this.editor)
+        },
         async postArticle() {
             // 获取输入的内容
-            let markdown = this.$refs.myEditor.invoke('getMarkdown')
+            let markdown = this.editor.getMarkdown()
             // 将内容发送到数据库
             const data = {
                 title: this.title,
@@ -66,26 +99,31 @@ export default {
                     message: '文章发布成功',
                     type: 'success'
                 });
+                this.clearArticle(false)
             } else {
                 this.$message.error('文章发布失败')
                 console.error(res.data)
             }
         },
-        clearArticle() {
-            this.$confirm('是否确定清空内容?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
-            }).then(() => {
-                this.$refs.myEditor.invoke('setMarkdown', '')
-                this.$message({
-                    type: 'success',
-                    message: '已清空'
-                });
-            }).catch(() => { })
+        clearArticle(manual = true) {
+            if (!manual) this.editor.setMarkdown('')
+            else {
+                this.$confirm('是否确定清空内容?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.editor.setMarkdown('')
+                    this.$message({
+                        type: 'success',
+                        message: '已清空'
+                    });
+                }).catch(() => { })
+            }
         }
     },
     mounted() {
+        this.InitEditer()
     },
 }
 

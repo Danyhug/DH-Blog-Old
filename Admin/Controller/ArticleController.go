@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 type CreateData struct {
@@ -87,12 +88,18 @@ func QuerySingleArticle(c *gin.Context) {
 func UploadImg(c *gin.Context) {
 	// 单文件
 	file, _ := c.FormFile("file")
+	now := time.Now()
 
-	dst := "./img/" + file.Filename
+	year := now.Year()
+	month := now.Month()
+	day := now.Day()
+
+	fileName := strconv.FormatInt(time.Now().Unix(), 10) + ".jpg"
+	dst := fmt.Sprintf("./upload/img/%d%02d%02d/%s", year, month, day, fileName)
 	// 上传文件至指定的完整文件路径
 	c.SaveUploadedFile(file, dst)
 
-	c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
+	c.String(http.StatusOK, dst)
 }
 
 // QueryPageSize 查询页数

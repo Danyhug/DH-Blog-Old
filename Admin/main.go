@@ -31,6 +31,8 @@ func main() {
 	{
 		// 查询页数
 		article.POST("pageSize", Controller.QueryPageSize)
+		// 静态资源托管
+		article.Static("/upload", "./upload")
 
 		// 新增
 		article.POST("add", Controller.CreateArticle)
