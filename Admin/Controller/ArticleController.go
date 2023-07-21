@@ -120,9 +120,10 @@ func UpdateArticle(c *gin.Context) {
 		fmt.Println("更新文章出错", err)
 		return
 	}
-
+	// 更新文章
 	success := Models.UpdateArticle(reqData.ID, reqData.Title, reqData.Content)
 	if success {
+		// 更新时间
 		Models.UpdateArticleUpdated(reqData.ID)
 		c.JSON(http.StatusOK, gin.H{
 			"code": 1,

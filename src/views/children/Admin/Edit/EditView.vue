@@ -13,8 +13,6 @@
                 <p class="tip">文章内容</p>
             </el-divider>
             <div ref="myEditor"></div>
-            <!-- <Editor ref="myEditor" :options="editorOptions" height="500px" initialEditType="markdown"
-                previewStyle="vertical" /> -->
         </div>
         <div class="func-btn">
             <el-button type="primary" @click="postArticle">发布</el-button>
@@ -50,7 +48,6 @@ export default {
             viewerOptions: {
                 plugins: [codeSyntaxHighlight]
             },
-            viewerText: '# 我是一个测试文本\n## 是的\n```javascript\nlet n = Number;\n```'
         }
     },
     components: {

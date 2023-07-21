@@ -6,6 +6,7 @@ import AdminView from '@/views/AdminView.vue'
 import ArticleView from '@/views/ArticleView.vue'
 
 import EditView from '@/views/children/Admin/Edit/EditView.vue'
+import ManagerView from '@/views/children/Admin/Manager/ManagerView.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,9 @@ const routes = [
     path: '/admin', component: AdminView, children: [
       {
         path: 'edit', component: EditView
+      },
+      {
+        path: 'manager', component: ManagerView
       }
     ]
   }
