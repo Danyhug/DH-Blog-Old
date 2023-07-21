@@ -17,7 +17,7 @@
                     </li>
                     <li class="item">
                         <a href="tags">
-                            <Icon iconName="icon-shejiwenzhang"></Icon>
+                            <Icon iconName="icon-fenlei"></Icon>
                             分类
                         </a>
                     </li>

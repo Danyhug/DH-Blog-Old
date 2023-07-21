@@ -68,6 +68,10 @@ func QueryArticle(c *gin.Context) {
 // QuerySingleArticle 查询指定文章
 func QuerySingleArticle(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
+
+	// 观看数 + 1
+	Models.UpdateArticleViewNum(id)
+
 	data, status := Models.FindArticle(id)
 	if status {
 		c.JSON(200, gin.H{
@@ -100,6 +104,37 @@ func UploadImg(c *gin.Context) {
 	c.SaveUploadedFile(file, dst)
 
 	c.String(http.StatusOK, dst)
+}
+
+type UpdateData struct {
+	ID      int    `json:"id"`
+	Title   string `json:"title"`
+	Content string `json:"content"`
+}
+
+// UpdateArticle 更新文章
+func UpdateArticle(c *gin.Context) {
+	var reqData UpdateData
+	err := c.ShouldBindJSON(&reqData)
+	if err != nil {
+		fmt.Println("更新文章出错", err)
+		return
+	}
+
+	success := Models.UpdateArticle(reqData.ID, reqData.Title, reqData.Content)
+	if success {
+		Models.UpdateArticleUpdated(reqData.ID)
+		c.JSON(http.StatusOK, gin.H{
+			"code": 1,
+			"msg":  "文章更新成功",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code": -1,
+		"msg":  "文章更新失败",
+	})
 }
 
 // QueryPageSize 查询页数

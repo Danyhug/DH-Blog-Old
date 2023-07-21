@@ -6,10 +6,10 @@
         </div>
         <div class="info">
             <span>
-                更新于 2023-07-13
+                更新于 {{ $getDate(update, true) }}
             </span>
             <span>
-                阅读次数 9 次
+                阅读次数 {{ viewnum }} 次
             </span>
         </div>
     </div>
@@ -23,8 +23,17 @@ import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/d
 export default {
     name: 'ArticleChild',
     props: {
+        // 内容
         content: {
             type: String,
+            require: true
+        },
+        update: {
+            type: Number,
+            require: true
+        },
+        viewnum: {
+            type: Number,
             require: true
         }
     },

@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS articles (
     title VARCHAR(30) NOT NULL,
     content TEXT NOT NULL,
     created INTEGER, -- 发布时间
-    updated INTEGER -- 更改时间
+    updated INTEGER, -- 更改时间
+    viewnum INTEGER -- 观看次数
 );
 
 -- 创建标签-文章关联表

@@ -10,7 +10,7 @@
             </div>
         </Banner>
         <Main>
-            <ArticleChild :content="content"></ArticleChild>
+            <ArticleChild :content="content" :update="update" :viewnum="viewnum"></ArticleChild>
         </Main>
         <Footer></Footer>
     </div>
@@ -31,7 +31,9 @@ export default {
             id: 1,
             title: '',
             content: '',
-            created: 0
+            created: 0,
+            update: 0,
+            viewnum: 0
         }
     },
     props: {
@@ -42,7 +44,7 @@ export default {
             this.id = this.$route.params.id
             let res = await this.$http.get('article/' + this.id)
             let data = res.data;
-            ({ Title: this.title, Content: this.content, Created: this.created } = data.data)
+            ({ Title: this.title, Content: this.content, Created: this.created, Updated: this.update, Viewnum: this.viewnum } = data.data)
 
         }
     },

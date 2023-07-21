@@ -43,6 +43,9 @@ func main() {
 		article.POST("query", Controller.QueryArticle)
 		// 查询单用户
 		article.GET(":id", Controller.QuerySingleArticle)
+
+		// 更新数据
+		article.POST("update", Controller.UpdateArticle)
 	}
 	//
 	//// 评论相关接口

@@ -12,7 +12,7 @@
               {{ $getDate(created) }}
             </span>
             <span class="num-word">
-              <Icon iconName="icon-xuanzeshijian" iconSize="1.5"></Icon>
+              <Icon iconName="icon-gangbi" iconSize="1.5"></Icon>
               {{ $getWordCount(content) }} 字
             </span>
             <span class="time-consum">
